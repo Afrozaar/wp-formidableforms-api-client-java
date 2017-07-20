@@ -6,15 +6,19 @@ import com.afrozaar.wordpress.formidableforms.api.Entries;
 import com.afrozaar.wordpress.formidableforms.api.Forms;
 import com.afrozaar.wordpress.formidableforms.model.Entry;
 import com.afrozaar.wordpress.formidableforms.model.Form;
+import com.afrozaar.wordpress.formidableforms.request.Request;
 import com.afrozaar.wordpress.wpapi.v2.Strings;
+import com.afrozaar.wordpress.wpapi.v2.api.Contexts;
 import com.afrozaar.wordpress.wpapi.v2.model.Link;
-import com.afrozaar.wordpress.wpapi.v2.request.Request;
+import com.afrozaar.wordpress.wpapi.v2.model.Media;
 import com.afrozaar.wordpress.wpapi.v2.request.SearchRequest;
+import com.afrozaar.wordpress.wpapi.v2.response.CustomRenderableParser;
 import com.afrozaar.wordpress.wpapi.v2.response.PagedResponse;
 import com.afrozaar.wordpress.wpapi.v2.util.MavenProperties;
 import com.afrozaar.wordpress.wpapi.v2.util.Tuple2;
 
 import com.google.common.base.Preconditions;
+import com.google.common.collect.ImmutableMap;
 
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +28,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import java.util.function.Function;
@@ -61,17 +67,6 @@ public class Client extends com.afrozaar.wordpress.wpapi.v2.Client implements Fo
         super(CONTEXT, baseUrl, username, password, usePermalinkEndpoint, debug, requestFactory);
     }
 
-    @Override
-    public <T> PagedResponse<T> getPagedResponse(String context, Class<T> typeRef, String... expandParams) {
-        return null;
-    }
-
-    @Override
-    public <T> PagedResponse<T> getPagedResponse(URI uri, Class<T> typeRef) {
-        return null;
-    }
-
-    @Override
     public <T> PagedResponse<T> traverse(PagedResponse<T> response, Function<PagedResponse<?>, String> direction) {
         return null;
     }
@@ -98,14 +93,15 @@ public class Client extends com.afrozaar.wordpress.wpapi.v2.Client implements Fo
 
     @Override
     public Entry deleteEntry(Entry entry) {
-        final ResponseEntity<Entry> exchange = doCustomExchange(Request.POST, HttpMethod.DELETE, Entry.class, forExpand(entry.getId()), null,null, null);
+        final ResponseEntity<Entry> exchange = doCustomExchange(Request.ENTRIES, HttpMethod.DELETE, Entry.class, forExpand(entry.getId()), null,null, null);
         Preconditions.checkArgument(exchange.getStatusCode().is2xxSuccessful());
         return exchange.getBody();
     }
 
     @Override
     public List<Entry> getEntries(long formId) {
-        return null;
+        final ResponseEntity<Entry[]> exchange = doCustomExchange(Request.FORM_ENTRIES, HttpMethod.GET, Entry[].class, forExpand(formId), null, null, null);
+        return Arrays.asList(exchange.getBody());
     }
 
     @Override
