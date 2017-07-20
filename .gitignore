@@ -27,3 +27,4 @@ hs_err_pid*
 /**/*.iml
 /**/target/
 /**/pom.xml~
+/**/*-test.yaml
