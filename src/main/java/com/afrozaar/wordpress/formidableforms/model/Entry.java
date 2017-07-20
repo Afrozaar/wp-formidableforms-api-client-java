@@ -1,13 +1,14 @@
 package com.afrozaar.wordpress.formidableforms.model;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
 import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
@@ -196,4 +197,23 @@ public class Entry {
         this.additionalProperties.put(name, value);
     }
 
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("Entry{");
+        sb.append("id='").append(id).append('\'');
+        sb.append(", itemKey='").append(itemKey).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", ip='").append(ip).append('\'');
+        sb.append(", meta=").append(meta);
+        sb.append(", formId='").append(formId).append('\'');
+        sb.append(", postId='").append(postId).append('\'');
+        sb.append(", userId='").append(userId).append('\'');
+        sb.append(", parentItemId='").append(parentItemId).append('\'');
+        sb.append(", isDraft='").append(isDraft).append('\'');
+        sb.append(", updatedBy='").append(updatedBy).append('\'');
+        sb.append(", createdAt='").append(createdAt).append('\'');
+        sb.append(", updatedAt='").append(updatedAt).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
