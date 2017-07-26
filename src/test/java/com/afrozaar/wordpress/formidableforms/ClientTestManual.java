@@ -21,8 +21,9 @@ import java.util.List;
 /**
  * @author johan
  */
-public class ClientTest {
+public class ClientTestManual {
 
+    @Ignore
     @Test
     public void testEntry() {
 
