@@ -21,7 +21,6 @@ import org.springframework.http.client.ClientHttpRequestFactory;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 
 import com.fasterxml.jackson.databind.JsonNode;
-import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -40,18 +39,6 @@ public class Client extends com.afrozaar.wordpress.wpapi.v2.Client implements Fo
     public static String CONTEXT = "/wp-json/frm/v2";
 
     private static final Logger LOG = LoggerFactory.getLogger(Client.class);
-
-    private static final String VERSION = "version";
-    private static final String ARTIFACT_ID = "artifactId";
-
-//    private final Predicate<Link> next = link -> Strings.NEXT.equals(link.getRel());
-//    private final Predicate<Link> previous = link -> Strings.PREV.equals(link.getRel());
-//    private final Tuple2<String, String> userAgentTuple;
-
-//    {
-//        Properties properties = MavenProperties.getProperties();
-//        userAgentTuple = Tuple2.of("User-Agent", format("%s/%s", properties.getProperty(ARTIFACT_ID), properties.getProperty(VERSION)));
-//    }
 
     public Client(String baseUrl, String username, String password, boolean usePermalinkEndpoint, boolean debug) {
         this(baseUrl, username, password, usePermalinkEndpoint, debug, new HttpComponentsClientHttpRequestFactory());
