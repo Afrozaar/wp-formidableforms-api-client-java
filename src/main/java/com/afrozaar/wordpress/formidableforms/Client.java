@@ -61,7 +61,7 @@ public class Client extends com.afrozaar.wordpress.wpapi.v2.Client implements Fo
         List<T> items;
         while (hasMore.test((items = ResponseParser.fromObjectResponse(exchange.getBody(), clazz)))) {
             collector.addAll(items);
-            exchange = getWithQueryMap.apply(of("page", page++));
+            exchange = getWithQueryMap.apply(of("page", ++page));
         }
 
         return collector;
