@@ -80,7 +80,8 @@ public class Client extends com.afrozaar.wordpress.wpapi.v2.Client implements Fo
 
     @Override
     public Entry getEntry(long id) {
-        return null;
+        final ResponseEntity<Entry> exchange = doCustomExchange(Request.ENTRY, HttpMethod.GET, Entry.class, forExpand(id), null, null, null);
+        return exchange.getBody();
     }
 
     @Override
